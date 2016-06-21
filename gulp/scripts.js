@@ -30,9 +30,6 @@ gulp.task('scripts:esm', () => {
                   .pipe($.sourcemaps.init())
                   .pipe($.typescript(taskConfig, undefined, $.typescript.reporter.nullReporter()));
   return tsResult.js
-    .pipe($.header(config.banner, {
-      pkg: config.pkg,
-    }))
     .pipe($.rename(replaceSrcDir))
     .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest(config.PATHS.dist.esm));
@@ -46,16 +43,9 @@ gulp.task('scripts:cjs', () => {
                   .pipe($.typescript(config.tscConfigCjs));
 
   return merge([
-    tsResult.dts.pipe($.header(config.banner, {
-      pkg: config.pkg,
-    }))
-    .pipe($.rename(replaceSrcDir))
+    tsResult.dts.pipe($.rename(replaceSrcDir))
     .pipe(gulp.dest(config.PATHS.dist.cjs)),
-
-    tsResult.js.pipe($.header(config.banner, {
-      pkg: config.pkg,
-    }))
-    .pipe($.rename(replaceSrcDir))
+    tsResult.js.pipe($.rename(replaceSrcDir))
     .pipe($.sourcemaps.write('.'))
     .pipe(gulp.dest(config.PATHS.dist.cjs)),
   ]);
