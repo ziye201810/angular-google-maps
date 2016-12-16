@@ -120,8 +120,6 @@ export interface MouseEvent { latLng: LatLng; }
 export interface MapOptions {
   center?: LatLng|LatLngLiteral;
   zoom?: number;
-  minZoom?: number;
-  maxZoom?: number;
   disableDoubleClickZoom?: boolean;
   disableDefaultUI?: boolean;
   backgroundColor?: string;
